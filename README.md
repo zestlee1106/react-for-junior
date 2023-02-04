@@ -1,70 +1,25 @@
-# Getting Started with Create React App
+# create react app 을 이용해서 리액트를 만들어 보자
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## create react app 을 사용하면서 얻을수 있는 이점
 
-## Available Scripts
+1. 필요한 패키지들을 npm 을 통해서 추가가 가능하다. 코드를 간결하게 쓸 수가 있음
+2. IDE 의 최대 이점인 intel 기능을 쓸 수가 있다
+3. 파일들을 모듈화해서 컴포넌트들 더 쉽게 분리할 수 있다. (import, export)
+4. **style 을 모듈화 할 수 있다**
+   - 만약 분리한 컴포넌트의 css 에서 class 명이 중복된다면,  
+     react 에서 알아서 랜덤한 클래스를 만들어 주기 때문에, 스타일을 덮어 씌우지 않는다.  
+     이것은 css 파일을 ~~~~.module.css 로 생성했을 때만 적용이 된다.
 
-In the project directory, you can run:
+## strictMode?
 
-### `npm start`
+- strictMode 는 create react 로 리액트 프로젝트를 만들면 저절로 감싸져서 나온다
+- 해당 태그가 있을 경우 그릴 때 자손까지 검사하기 때문에 렌더가 두 번 실행된다
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## useEffect
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- component 내부에 있는 코드들은 렌더링이 될 때 항상 실행된다
+- state 가 바뀔 때마다 컴포넌트는 렌더링이 된다
+- 그 말은 즉슨, state 가 바뀔 때마다 component 의 내부에 있는 코드들은 항상 실행이 된다
+- 예를 들어 API 를 호출하는 로직이 내부에 있다면, 어느 state 가 바뀔 때마다 항상 실행되기 때문에, 필요없는 리소스를 잡아먹을 수 있다.
+- 그럴 일을 덜기 위해서 useEffect 를 사용히는 것이다.
+- 두번쨰 인자에 텅 빈 array 를 넣으면 초기 렌더 시점에만 실행이 되고, 특정 state 를 넣으면 해당 state 가 바뀔 때에만 실행이 된다.
