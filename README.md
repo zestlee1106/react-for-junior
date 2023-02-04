@@ -23,3 +23,26 @@
 - 예를 들어 API 를 호출하는 로직이 내부에 있다면, 어느 state 가 바뀔 때마다 항상 실행되기 때문에, 필요없는 리소스를 잡아먹을 수 있다.
 - 그럴 일을 덜기 위해서 useEffect 를 사용히는 것이다.
 - 두번쨰 인자에 텅 빈 array 를 넣으면 초기 렌더 시점에만 실행이 되고, 특정 state 를 넣으면 해당 state 가 바뀔 때에만 실행이 된다.
+
+### useEffect 에서 destroyed 를 사용하다
+
+- react 에서는 destroy 훅이 따로 없는가 봉가...
+- destroy 시점을 알기 위해서는 useEffect 에서 특정 함수를 리턴해 주면 된다
+- dependency 가 없는 useEffect 에서, 특정 함수를 리턴해주면... 해당 함수가 컴포넌트가 destroy 될 때 실행이 된다
+
+++
+
+- dependency 가 있는 함수도 destroy 가 동작한다
+- 컴포넌트 내부에서 사용하는 state 가 있다면, 그리고 해당 state 가 바뀔 때마다 setInterval 을 하는 useEffect 가 있다면 useEffect 에서 clearInterval 을 해 주는 함수를 리턴해주는 코드가 있어야 할 것 같다는 생각이 든다.
+
+예시)
+
+```javascript
+useEffect(() => {
+  const id = setInterval(() => {
+    setCount(count + 1);
+  }, 1000);
+
+  return () => clearInterval(id);
+}, [count]);
+```
