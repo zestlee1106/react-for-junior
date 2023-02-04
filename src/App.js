@@ -1,13 +1,28 @@
 import { useState, useEffect } from "react";
 
 function Hello() {
+  const [state, setState] = useState(false);
+  const onClick = () => {
+    setState((test) => !test);
+  };
   useEffect(() => {
     console.log("hi :)");
     return () => {
       console.log("bye :(");
     };
   }, []);
-  return <h1>Hello</h1>;
+  useEffect(() => {
+    console.log("hi :) test");
+    return () => {
+      console.log("bye :( tset");
+    };
+  }, [state]);
+  return (
+    <>
+      <h1>Hello</h1>
+      <button onClick={onClick}>test</button>
+    </>
+  );
 }
 
 function App() {
