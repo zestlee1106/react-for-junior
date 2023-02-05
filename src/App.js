@@ -1,37 +1,32 @@
-import { useState, useEffect } from "react";
-
-function Hello() {
-  const [state, setState] = useState(false);
-  const onClick = () => {
-    setState((test) => !test);
-  };
-  useEffect(() => {
-    console.log("hi :)");
-    return () => {
-      console.log("bye :(");
-    };
-  }, []);
-  useEffect(() => {
-    console.log("hi :) test");
-    return () => {
-      console.log("bye :( tset");
-    };
-  }, [state]);
-  return (
-    <>
-      <h1>Hello</h1>
-      <button onClick={onClick}>test</button>
-    </>
-  );
-}
+import { useState } from "react";
 
 function App() {
-  const [showing, setShowing] = useState(false);
-  const onClick = () => setShowing((prev) => !prev);
+  const [toDo, setTodo] = useState("");
+  const [toDos, setToDos] = useState([]);
+  const onChange = (event) => {
+    setTodo(event.target.value);
+  };
+  const onSubmit = (event) => {
+    event.preventDefault();
+    if (toDo === "") {
+      return;
+    }
+    setToDos((currentArray) => [toDo, ...currentArray]);
+    setTodo("");
+    // toDos.push 이렇게 상태를 직접 바꾸면 안 된다. 반드시 set 함수를 통해서 해야 함
+  };
   return (
     <div>
-      {showing ? <Hello /> : null}
-      <button onClick={onClick}>{showing ? "Hide" : "Show"}</button>
+      <h1>My To Dos ({toDos.length})</h1>
+      <form onSubmit={onSubmit}>
+        <input
+          onChange={onChange}
+          value={toDo}
+          type="text"
+          placeholder="Write your to do"
+        />
+        <button>Add To Do</button>
+      </form>
     </div>
   );
 }

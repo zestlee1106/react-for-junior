@@ -46,3 +46,8 @@ useEffect(() => {
   return () => clearInterval(id);
 }, [count]);
 ```
+
+## useState
+
+- state 를 직접 수정하면 절대 안 됨. 반드시 set 함수를 통해서 바꿔야 한다.
+- 왜냐하면 state 는 constant 일 뿐더러, let 으로 선언했다 하더라도 state 를 직접 변경하면 리액트가 render 함수를 호출하지 않기 때문에, UI 가 변경되지 않게 된다.
