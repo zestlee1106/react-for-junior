@@ -74,3 +74,10 @@ useEffect(() => {
 
 - 이렇게 하면, Detail 컴포넌트에서 useParams 를 이용하여 파라미터를 받아올 수 있다.
 - : 뒤에 붙인 이름이 파라미터 명이 된다.
+
+---
+
+## gh-pages
+
+- gh-pages 라는 패키지를 사용하면, package.json 에 있는 homepage 에 deploy 를 해 준다
+- `gh-pages -d build` 스크립트를 이용하면 되고, predeploy 라고 스크립트를 하나 더 생성해서 deploy 전 build 도 해 주게끔 만들자
