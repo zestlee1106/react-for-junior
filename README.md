@@ -51,3 +51,11 @@ useEffect(() => {
 
 - state 를 직접 수정하면 절대 안 됨. 반드시 set 함수를 통해서 바꿔야 한다.
 - 왜냐하면 state 는 constant 일 뿐더러, let 으로 선언했다 하더라도 state 를 직접 변경하면 리액트가 render 함수를 호출하지 않기 때문에, UI 가 변경되지 않게 된다.
+
+## React route
+
+- react 에서는 라우트 기능을 사용하기 위해서 react route dom 이라는 것을 import 해서 쓴다
+- App.js 에서 Router, Route 컴포넌트를 import 해 오고, Route 내부에 해당 경로에 보여 주고 싶은 컴포넌트를 넣으면 된다
+- Vue 랑 매우 다른 점은, Vue 는 js 형태로 route 를 맵핑해 주고 있으나, React 는 컴포넌트 형태로 각각을 맵핑해 준다는 것이다
+- Switch 는 한 라우트에서 한 화면만 보여 주기 위한 컴포넌트이다
+- 만약 RouteLink 같은 기능을 사용하고 싶다면, Link 컴포넌트를 사용하면 된다
