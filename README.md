@@ -59,3 +59,18 @@ useEffect(() => {
 - Vue 랑 매우 다른 점은, Vue 는 js 형태로 route 를 맵핑해 주고 있으나, React 는 컴포넌트 형태로 각각을 맵핑해 준다는 것이다
 - Switch 는 한 라우트에서 한 화면만 보여 주기 위한 컴포넌트이다
 - 만약 RouteLink 같은 기능을 사용하고 싶다면, Link 컴포넌트를 사용하면 된다
+
+## dynamic route
+
+- 동적 라우팅을 하고 싶을 수 있다 (예를 들어 /movie/234)
+- 그럴 땐 Route 컴포넌트의 path props 에 :name 만 추가해 주면 된다.
+  예시)
+
+```javascript
+<Route path="/movie/:id">
+  <Detail />
+</Route>
+```
+
+- 이렇게 하면, Detail 컴포넌트에서 useParams 를 이용하여 파라미터를 받아올 수 있다.
+- : 뒤에 붙인 이름이 파라미터 명이 된다.
