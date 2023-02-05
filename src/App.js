@@ -1,43 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
-  const [toDo, setTodo] = useState("");
-  const [toDos, setToDos] = useState([]);
-  const onChange = (event) => {
-    setTodo(event.target.value);
-  };
-  const onSubmit = (event) => {
-    event.preventDefault();
-    if (toDo === "") {
-      return;
-    }
-    setToDos((currentArray) => [toDo, ...currentArray]);
-    setTodo("");
-    // toDos.push 이렇게 상태를 직접 바꾸면 안 된다. 반드시 set 함수를 통해서 해야 함
-  };
+  const [loading, setLoading] = useState(true);
+  const [coins, setCoins] = useState([]);
+  const [dollar, setDollar] = useState(0);
+  const [selectedCoin, setSelectedCoin] = useState(0);
 
-  console.log(toDos);
-  console.log(toDos.map((item, index) => <li key={index}>{item}</li>));
+  useEffect(() => {
+    fetch("https://api.coinpaprika.com/v1/tickers")
+      .then((response) => response.json())
+      .then((json) => {
+        setCoins(json);
+        setLoading(false);
+      });
+  }, []);
+
+  const onChange = (event) => {
+    setDollar(event.target.value);
+  };
+  const onCoinChange = (event) => {
+    setSelectedCoin(Number(event.target.value));
+  };
 
   return (
     <div>
-      <h1>My To Dos ({toDos.length})</h1>
-      <form onSubmit={onSubmit}>
-        <input
-          onChange={onChange}
-          value={toDo}
-          type="text"
-          placeholder="Write your to do"
-        />
-        <button>Add To Do</button>
-      </form>
-      <hr />
-      <ul>
-        {/* 밑이 잘 동작하는 이유...  html 에서 [] 를 바인딩하면 그대로 배열의 모든 item 들이 보인다... 몰랐네 */}
-        {toDos.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
+      <h1>The Coins! {loading ? "" : `(${coins.length})`}</h1>
+      <input
+        placeholder="얼마를 넣을 건가요?"
+        value={dollar}
+        onChange={onChange}
+        type="number"
+      />
+      {loading ? (
+        <strong>Loading...</strong>
+      ) : (
+        <select value={selectedCoin} onChange={onCoinChange}>
+          {coins.map((coin) => (
+            <option key={coin.id} value={coin.quotes.USD.price}>
+              {coin.name} ({coin.symbol}): {coin.quotes.USD.price}
+            </option>
+          ))}
+        </select>
+      )}
+
+      {selectedCoin ? <h3>총 {dollar / selectedCoin} 개</h3> : null}
     </div>
   );
 }
