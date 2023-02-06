@@ -30,7 +30,7 @@ function Detail() {
           summary={movie.summary}
           genres={movie.genres}
           id={movie.id}
-          isTitleLink={false}
+          isDetail={true}
         />
       )}
     </div>
